@@ -1,4 +1,4 @@
-name 'Test Cookbook'
+name 'test-Cookbook'
 maintainer 'Biswajit Das'
 maintainer_email 'biswajitbangalore@gmail.com'
 license 'All rights reserved'
