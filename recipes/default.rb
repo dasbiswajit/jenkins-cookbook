@@ -11,4 +11,11 @@ file '/tmp/testfile.log' do
   owner 'root'
   group 'root' 
 end
+# test file resource
+file '/tmp/testfile1.log' do
+  content 'This is a test file'
+  mode '0755'
+  owner 'root'
+  group 'root' 
+end
 
