@@ -5,6 +5,7 @@
 Log.debug("Node attributes from" + node.default['test-cookbook']['attribute1'])
 
 bash 'jenkins Installation' do
+  cwd ::File.dirname('/var/lib/jenkins')
   code <<-EOH
             sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat/jenkins.repo
             sleep 10
