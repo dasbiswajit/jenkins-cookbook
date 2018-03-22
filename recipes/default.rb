@@ -21,7 +21,7 @@ bash 'jenkins Installation' do
     cd /tmp/jenkins_scripts >> $logfile     
     git clone https://github.com/dasbiswajit/jenkins-script.git >> $logfile     
     cd jenkins-script/ >> $logfile     
-    sudo sh Jenkins_plugin.sh role-strategy >> $logfile   
+    sudo sh jenkins_plugin.sh role-strategy >> $logfile   
     sleep 30            
     sudo service jenkins restart
     sleep 20
