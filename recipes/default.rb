@@ -17,8 +17,7 @@ bash 'jenkins Installation' do
     echo "Info:: Installing Jenkins" >> $logfile
     sudo yum install jenkins -y >> $logfile
     sleep 30
-    echo "download jenkins plugins script" >> $logfile
-    mkdir /tmp/jenkins_scripts >> $logfile     
+    echo "download jenkins plugins script" >> $logfile        
     cd /tmp/jenkins_scripts >> $logfile     
     git clone https://github.com/dasbiswajit/jenkins-script.git >> $logfile     
     cd jenkins-script/ >> $logfile     
