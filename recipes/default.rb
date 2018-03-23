@@ -1,6 +1,6 @@
 # Cookbook: test-cookbook
 # Recipe: default
-
+user_name = "admin"
 # Get the current version from metadata
 Log.debug("Node attributes from" + node.default['test-cookbook']['attribute1'])
 
@@ -27,4 +27,20 @@ bash 'jenkins Installation' do
     sleep 20
     echo "Info:: Jenkins installed successfully" >> $logfile
    EOH
+end
+
+template "/var/lib/jenkins/config.xml" do
+  source 'config.xml.erb'
+  mode '0644'
+  owner 'jenkins'
+  group 'jenkins'
+  variables ({
+    :user => user_name
+})
+  notifies :restart, "service[jenkins]"
+end
+
+service 'jenkins' do
+  supports :restart => :true
+  action [ :enable, :start ]
 end
