@@ -29,17 +29,6 @@ bash 'jenkins Installation' do
    EOH
 end
 
-template "/var/lib/jenkins/config.xml" do
-  source 'config.xml.erb'
-  mode '0644'
-  owner 'jenkins'
-  group 'jenkins'
-  variables ({
-    :user => user_name
-})
-  notifies :restart, "service[jenkins]"
-end
-
 service 'jenkins' do
   supports :restart => :true
   action [ :enable, :start ]
