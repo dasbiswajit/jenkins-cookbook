@@ -23,7 +23,7 @@
       <insensitiveSearch>true</insensitiveSearch>
     </hudson.search.UserSearchProperty>
     <hudson.security.HudsonPrivateSecurityRealm_-Details>
-      <passwordHash></passwordHash>
+      <passwordHash>"<%= node['test-cookbook']['hashval'] %>"</passwordHash>
     </hudson.security.HudsonPrivateSecurityRealm_-Details>
     <jenkins.security.LastGrantedAuthoritiesProperty>
       <roles>
