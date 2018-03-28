@@ -29,6 +29,21 @@ bash 'jenkins Installation' do
    EOH
 end
 
+template '/var/lib/jenkins/users/admin' do
+  source 'admin-config.xml.erb'
+  owner 'jenkins'
+  group 'jenkins'
+  mode '0644'
+end
+
+
+template '/var/lib/jenkins' do
+  source 'jenkins-config.xml.erb'
+  owner 'jenkins'
+  group 'jenkins'
+  mode '0644'
+end
+
 service 'jenkins' do
   supports :restart => :true
   action [ :enable, :start ]
