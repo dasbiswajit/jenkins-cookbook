@@ -29,7 +29,7 @@ bash 'jenkins Installation' do
    EOH
 end
 
-template '/var/lib/jenkins/users/admin' do
+template '/var/lib/jenkins/users/admin/config.xml' do
   source 'admin-config.xml.erb'
   owner 'jenkins'
   group 'jenkins'
@@ -37,7 +37,7 @@ template '/var/lib/jenkins/users/admin' do
 end
 
 
-template '/var/lib/jenkins' do
+template '/var/lib/jenkins/config.xml' do
   source 'jenkins-config.xml.erb'
   owner 'jenkins'
   group 'jenkins'
