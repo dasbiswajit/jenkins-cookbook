@@ -43,8 +43,6 @@ template '/var/lib/jenkins/config.xml' do
   group 'jenkins'
   mode '0644'
 end
-
-service 'jenkins' do
-  supports :restart => :true
-  action [ :enable, :start ]
+service "jenkins" do
+  action :restart
 end
