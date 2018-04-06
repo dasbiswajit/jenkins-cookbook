@@ -43,6 +43,14 @@ bash 'jenkins_plugin' do
   EOH
 end
 
+template "/home/ec2-user/.aws/config" do
+  source 'aws-config.erb'
+  mode '0744'
+  variables ({
+    :profile => profile_name
+    :region => region_name
+  })
+end
 
 template "/var/lib/jenkins/users/admin/config.xml" do
   source 'admin-config.xml.erb'
@@ -65,17 +73,6 @@ template "/var/lib/jenkins/config.xml" do
 })
   notifies :restart, "service[jenkins]"
 end
-
-
-template "/home/ec2-user/.aws/config" do
-  source 'jenkins-config.xml.erb'
-  mode '0744'
-  owner 'ec2-user'
-  group 'ec2-user'
-  variables ({
-    :profile => profile_name
-    :region => region_name
-})
 
 service 'jenkins' do
   supports :restart => :true
