@@ -26,6 +26,10 @@ bash 'jenkins Installation' do
     sudo service jenkins restart
     sleep 20
     echo "Info:: Jenkins installed successfully" >> $logfile
+    cd /home/ec2-user
+    mkdir .aws
+    echo "[profile security]" >> /home/ec2-user/.aws/config
+    echo "region = eu-west-1" >> /home/ec2-user/.aws/config
    EOH
 end
 
