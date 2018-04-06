@@ -5,6 +5,8 @@
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
 user_name = "admin"
+profile_name = "security"
+region_name = "eu-west-1"
 
 yum_repository 'jenkins' do
   description "Jenkins Repo"
@@ -13,14 +15,24 @@ yum_repository 'jenkins' do
   action :create
 end
 
-yum_package 'jenkins' do
-action :install
+for package in ['jenkins', 'java-1.8.0-openjdk'] do
+  yum_package "#{package}" do
+    package_name "#{package}"
+    action :install
+  end
+end
+
+directory '/home/ec2-user/.aws' do
+  owner 'ec2-user'
+  group 'ec2-user'
+  mode '0750'
+  action :create
 end
 
 git '/tmp/jenkins-script' do
-repository "https://github.com/dasbiswajit/jenkins-script.git"
-reference "master"
-action :checkout
+  repository "https://github.com/dasbiswajit/jenkins-script.git"
+  reference "master"
+  action :checkout
 end
 
 bash 'jenkins_plugin' do
@@ -53,6 +65,17 @@ template "/var/lib/jenkins/config.xml" do
 })
   notifies :restart, "service[jenkins]"
 end
+
+
+template "/home/ec2-user/.aws/config" do
+  source 'jenkins-config.xml.erb'
+  mode '0744'
+  owner 'ec2-user'
+  group 'ec2-user'
+  variables ({
+    :profile => profile_name
+    :region => region_name
+})
 
 service 'jenkins' do
   supports :restart => :true
