@@ -22,11 +22,13 @@ for package in ['jenkins', 'java-1.8.0-openjdk'] do
   end
 end
 
-directory '/home/ec2-user/.aws' do
-  owner 'ec2-user'
-  group 'ec2-user'
-  mode '0750'
-  action :create
+for dir in ['/home/ec2-user/.aws', '/var/lib/jenkins/users', '/var/lib/jenkins/users/admin']
+  directory "#{dir}" do
+    owner 'ec2-user'
+    group 'ec2-user'
+    mode '0750'
+    action :create
+  end
 end
 
 git '/tmp/jenkins-script' do
@@ -47,7 +49,7 @@ template "/home/ec2-user/.aws/config" do
   source 'aws-config.erb'
   mode '0744'
   variables ({
-    :profile => profile_name
+    :profile => profile_name,
     :region => region_name
   })
 end
