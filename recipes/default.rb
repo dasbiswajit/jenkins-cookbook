@@ -22,7 +22,7 @@ for package in ['jenkins', 'java-1.8.0-openjdk'] do
   end
 end
 
-for dir in ['/home/ec2-user/.aws', '/var/lib/jenkins/users', '/var/lib/jenkins/users/admin']
+for dir in ['/var/lib/jenkins/.aws', '/var/lib/jenkins/users', '/var/lib/jenkins/users/admin']
   directory "#{dir}" do
     owner 'ec2-user'
     group 'ec2-user'
@@ -45,7 +45,7 @@ bash 'jenkins_plugin' do
   EOH
 end
 
-template "/home/ec2-user/.aws/config" do
+template "/var/lib/jenkins/.aws/config" do
   source 'aws-config.erb'
   mode '0744'
   variables ({
