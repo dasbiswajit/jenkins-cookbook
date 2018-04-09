@@ -1,6 +1,6 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <user>
-  <fullName>admin</fullName>
+  <fullName><%= @user %></fullName>
   <properties>
     <jenkins.security.ApiTokenProperty>
       <apiToken>{}</apiToken>
@@ -23,7 +23,7 @@
       <insensitiveSearch>true</insensitiveSearch>
     </hudson.search.UserSearchProperty>
     <hudson.security.HudsonPrivateSecurityRealm_-Details>
-      <passwordHash>admin:08cf4455b3c2a09cf499ec345f0b06409d89f52ed6a8647f0686089659316aaf</passwordHash>
+      <passwordHash><%= @user %>:08cf4455b3c2a09cf499ec345f0b06409d89f52ed6a8647f0686089659316aaf</passwordHash>
     </hudson.security.HudsonPrivateSecurityRealm_-Details>
     <jenkins.security.LastGrantedAuthoritiesProperty>
       <roles>
