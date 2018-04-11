@@ -8,6 +8,8 @@ user_name = "admin"
 profile_name = "security"
 region_name = "eu-west-1"
 
+Log.debug("Jenkins port number." + node.default['test-cookbook']['jenkins-master']['port'])
+
 yum_repository 'jenkins' do
   description "Jenkins Repo"
   baseurl "http://pkg.jenkins.io/redhat"
