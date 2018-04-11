@@ -4,7 +4,8 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
-user_name = "admin"
+#user_name = "admin"
+user_name = node.default['test-cookbook']['jenkins-master']['user_name']
 profile_name = "security"
 region_name = "eu-west-1"
 
