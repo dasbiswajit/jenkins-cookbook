@@ -1,5 +1,5 @@
 name 'jenkins-cookbook'
-maintainer 'Biswajit Das'
+maintainer 'Israrul Haque/Biswajit Das'
 maintainer_email 'biswajitbangalore@gmail.com'
 license 'All rights reserved'
 description 'This cookbook is a chef compliant cookbook'
