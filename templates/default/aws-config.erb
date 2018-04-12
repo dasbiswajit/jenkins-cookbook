@@ -1,2 +1,2 @@
-[profile <%= @profile %>]
-region <%= @region %>
+[profile <%= node.default['jenkins-cookbook']['jenkins-master']['profile'] %>]
+region <%= node.default['jenkins-cookbook']['jenkins-master']['region'] %>

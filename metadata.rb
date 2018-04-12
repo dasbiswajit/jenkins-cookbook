@@ -1,4 +1,4 @@
-name 'test-cookbook'
+name 'jenkins-cookbook'
 maintainer 'Biswajit Das'
 maintainer_email 'biswajitbangalore@gmail.com'
 license 'All rights reserved'
