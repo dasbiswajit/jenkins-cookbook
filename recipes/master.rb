@@ -1,13 +1,8 @@
 #
 # Cookbook:: jenkins
-# Recipe:: default
+# Recipe:: master
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
-
-#user_name = "admin"
-#user_name = node.default['jenkins-cookbook']['user-name']
-#profile_name = "security"
-#region_name = "eu-west-1"
 
 #Log.debug("Jenkins port number." + node.default['jenkins-cookbook']['jenkins-master']['port'])
 
