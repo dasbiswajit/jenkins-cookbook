@@ -22,7 +22,7 @@ bash 'jenkins Installation' do
     git clone https://github.com/dasbiswajit/jenkins-script.git >> $logfile     
     cd jenkins-script/ >> $logfile     
     sudo sh jenkins_plugin.sh role-strategy github-branch-source pipeline-github-lib pipeline-stage-view git subversion ssh-slaves matrix-authmatrix-auth cloudbees-folder antisamy-markup-formatter build-timeout credentials-binding timestamper ws-cleanup ant gradle workflow-aggregator pam-auth ldap email-ext mailer >> $logfile   
-    mkdir -p /var/lib/jenkins/users/admin
+    mkdir -p /var/lib/jenkins/users/admin/
     sleep 30            
     sudo service jenkins restart
     sleep 20
