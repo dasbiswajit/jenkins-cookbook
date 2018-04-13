@@ -13,7 +13,7 @@ yum_repository 'jenkins' do
   action :create
 end
 
-for package in ['jenkins', 'java-1.8.0-openjdk'] do
+for package in ['jenkins'] do
   yum_package "#{package}" do
     package_name "#{package}"
     action :install
