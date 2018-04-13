@@ -1,6 +1,6 @@
-# Cookbook: jenkins-cookbook
+# Cookbook: test-cookbook
 # Recipe: default
-
+user_name = "admin"
 # Get the current version from metadata
 Log.debug("Node attributes from" + node.default['test-cookbook']['attribute1'])
 
@@ -17,15 +17,32 @@ bash 'jenkins Installation' do
     echo "Info:: Installing Jenkins" >> $logfile
     sudo yum install jenkins -y >> $logfile
     sleep 30
-    echo "download jenkins plugins script" >> $logfile
-    mkdir /tmp/jenkins_scripts 
-    cd /tmp/jenkins_scripts >> $logfile
-    git clone https://github.com/dasbiswajit/jenkins-script.git | tee -a $logfile   
-    cd jenkins-script
-    sudo sh jenkins_plugin.sh role-strategy github-branch-source pipeline-github-lib pipeline-stage-view git subversion ssh-slaves matrix-authmatrix-auth cloudbees-folder antisamy-markup-formatter build-timeout credentials-binding timestamper ws-cleanup ant gradle workflow-aggregator pam-auth ldap email-ext mailer | tee -a $logfile  
+    echo "download jenkins plugins script" >> $logfile        
+    cd /tmp/jenkins_scripts >> $logfile     
+    git clone https://github.com/dasbiswajit/jenkins-script.git >> $logfile     
+    cd jenkins-script/ >> $logfile     
+    sudo sh jenkins_plugin.sh role-strategy github-branch-source pipeline-github-lib pipeline-stage-view git subversion ssh-slaves matrix-authmatrix-auth cloudbees-folder antisamy-markup-formatter build-timeout credentials-binding timestamper ws-cleanup ant gradle workflow-aggregator pam-auth ldap email-ext mailer >> $logfile   
     sleep 30            
     sudo service jenkins restart
     sleep 20
     echo "Info:: Jenkins installed successfully" >> $logfile
    EOH
+end
+
+template '/var/lib/jenkins/users/admin/config.xml' do
+  source 'admin-config.xml.erb'
+  owner 'jenkins'
+  group 'jenkins'
+  mode '0644'
+end
+
+
+template '/var/lib/jenkins/config.xml' do
+  source 'jenkins-config.xml.erb'
+  owner 'jenkins'
+  group 'jenkins'
+  mode '0644'
+end
+service "jenkins" do
+  action :restart
 end
