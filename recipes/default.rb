@@ -17,11 +17,12 @@ bash 'jenkins Installation' do
     echo "Info:: Installing Jenkins" >> $logfile
     sudo yum install jenkins -y >> $logfile
     sleep 30
-    echo "download jenkins plugins script" >> $logfile        
-    cd /tmp/jenkins_scripts >> $logfile     
-    git clone https://github.com/dasbiswajit/jenkins-script.git >> $logfile     
-    cd jenkins-script/ >> $logfile     
-    sudo sh jenkins_plugin.sh role-strategy >> $logfile   
+    echo "download jenkins plugins script" >> $logfile
+    mkdir /tmp/jenkins_scripts 
+    cd /tmp/jenkins_scripts >> $logfile
+    git clone https://github.com/dasbiswajit/jenkins-script.git | tee -a $logfile   
+    cd jenkins-script
+    sudo sh jenkins_plugin.sh role-strategy >> $logfile | tee -a $logfile  
     sleep 30            
     sudo service jenkins restart
     sleep 20
