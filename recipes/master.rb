@@ -13,6 +13,13 @@ yum_repository 'jenkins' do
   action :create
 end
 
+user 'jenkins' do
+  manage_home true
+  comment 'Jenkins'
+  home '/var/lib/jenkins'
+  shell '/bin/bash'
+end
+
 for package in ['jenkins'] do
   yum_package "#{package}" do
     package_name "#{package}"
@@ -20,7 +27,7 @@ for package in ['jenkins'] do
   end
 end
 
-for dir in ['/var/lib/jenkins/.aws', '/var/lib/jenkins/users', '/var/lib/jenkins/users/admin']
+for dir in ['/var/lib/jenkins/.aws', '/var/lib/jenkins/users', '/var/lib/jenkins/users/admin', '/var/lib/jenkins/.ssh']
   directory "#{dir}" do
     action :create
   end
@@ -37,6 +44,8 @@ bash 'jenkins_plugin' do
   logfile=/home/ec2-user/logfile.txt
   cd /tmp/jenkins-script
   sudo sh jenkins_plugin.sh role-strategy github-branch-source pipeline-github-lib pipeline-stage-view git subversion ssh-slaves matrix-authmatrix-auth cloudbees-folder antisamy-markup-formatter build-timeout credentials-binding timestamper ws-cleanup ant gradle workflow-aggregator pam-auth ldap email-ext mailer blueocean | tee -a $logfile
+  sed -i -e 's+JENKINS_PORT=\"8080\"+JENKINS_PORT="8081"+' /etc/sysconfig/jenkins
+  echo "Info:: Successfully Updated Jenkins Port" | tee -a $logfile
   EOH
 end
 
