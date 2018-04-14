@@ -22,9 +22,6 @@ end
 
 for dir in ['/var/lib/jenkins/.aws', '/var/lib/jenkins/users', '/var/lib/jenkins/users/admin']
   directory "#{dir}" do
-    owner 'ec2-user'
-    group 'ec2-user'
-    mode '0750'
     action :create
   end
 end
@@ -49,7 +46,6 @@ template "/var/lib/jenkins/users/admin/config.xml" do
   mode '0644'
   owner 'jenkins'
   group 'jenkins'
-  notifies :restart, "service[jenkins]"
 end
 
 template "/var/lib/jenkins/config.xml" do
@@ -57,10 +53,9 @@ template "/var/lib/jenkins/config.xml" do
   mode '0644'
   owner 'jenkins'
   group 'jenkins'
-  notifies :restart, "service[jenkins]"
 end
 
 service 'jenkins' do
-  supports :restart => :true
+  supports :restart => :true, :reload => true
   action [ :enable, :start ]
 end
