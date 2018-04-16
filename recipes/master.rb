@@ -20,7 +20,7 @@ user 'jenkins' do
   shell '/bin/bash'
 end
 
-for package in ['jenkins'] do
+for package in ['jenkins', 'mysql'] do
   yum_package "#{package}" do
     package_name "#{package}"
     action :install
