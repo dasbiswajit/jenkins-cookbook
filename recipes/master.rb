@@ -46,6 +46,7 @@ bash 'jenkins_plugin' do
   sudo sh jenkins_plugin.sh role-strategy github-branch-source pipeline-github-lib pipeline-stage-view git subversion ssh-slaves matrix-authmatrix-auth cloudbees-folder antisamy-markup-formatter build-timeout credentials-binding timestamper ws-cleanup ant gradle workflow-aggregator pam-auth ldap email-ext mailer blueocean | tee -a $logfile
   sed -i -e 's+JENKINS_PORT=\"8080\"+JENKINS_PORT="8081"+' /etc/sysconfig/jenkins
   echo "Info:: Successfully Updated Jenkins Port" | tee -a $logfile
+  echo 'export {http,https}_proxy="vpce-0c72110145328a789-ygatkcz5.vpce-svc-0a79140bd223a5a11.eu-west-1.vpce.amazonaws.com:3128"' | sudo tee -a /etc/bashrc
   EOH
 end
 
