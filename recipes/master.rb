@@ -20,10 +20,6 @@ user 'jenkins' do
   shell '/bin/bash'
 end
 
-group 'jenkins' do
-  action :create
-end
-
 execute 'permission_jenkins' do
   command 'chown jenkins:jenkins /var/lib/jenkins'
   action :run
@@ -36,9 +32,10 @@ for package in ['jenkins', 'mariadb'] do
   end
 end
 
-for dir in ['/var/lib/jenkins/.aws', '/var/lib/jenkins/users', '/var/lib/jenkins/users/admin', '/var/lib/jenkins/.ssh']
+for dir in ['/var/lib/jenkins/.aws', '/var/lib/jenkins/users/admin', '/var/lib/jenkins/.ssh']
   directory "#{dir}" do
     action :create
+    recursive true
   end
 end
 
