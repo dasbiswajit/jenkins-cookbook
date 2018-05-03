@@ -29,7 +29,7 @@ end
 
 directory '/var/lib/jenkins' do
   action :create
-done
+end
 
 bash 'bootstrap_pip_awscli' do
   code <<-EOH
