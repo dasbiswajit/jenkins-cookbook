@@ -4,13 +4,12 @@
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
 
-#bash 'yum update' do
-#  code <<-EOH
-#  logfile=/home/ec2-user/logfile.txt
-#  touch $logfile
-#  yum update -y >> $logfile
-#  EOH
-#end
+bash 'yum update' do
+  code <<-EOH
+  logfile=/home/ec2-user/logfile.txt
+  yum update -y >> $logfile
+  EOH
+end
 
 for package in ['python-setuptools', 'wget', 'unzip', 'java-1.8.0-openjdk', 'nfs-utils.x86_64'] do
   yum_package "#{package}" do
@@ -31,6 +30,7 @@ end
 
 bash 'bootstrap_pip_awscli' do
   code <<-EOH
+  logfile=/home/ec2-user/logfile.txt
   wget https://s3.amazonaws.com/cloudformation-examples/aws-cfn-bootstrap-latest.tar.gz -P /opt/aws/bin  >> $logfile
   easy_install --script-dir /opt/aws/bin aws-cfn-bootstrap-latest.tar.gz >> $logfile
   easy_install pip | tee -a $logfile
