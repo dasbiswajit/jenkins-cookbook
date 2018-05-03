@@ -13,7 +13,6 @@ end
 
 for package in ['python-setuptools', 'unzip', 'java-1.8.0-openjdk', 'nfs-utils.x86_64'] do
   yum_package "#{package}" do
-    package_name "#{package}"
     action :install
   end
 end
