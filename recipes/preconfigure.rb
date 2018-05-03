@@ -11,14 +11,14 @@ bash 'yum update' do
   EOH
 end
 
-for package in ['python-setuptools', 'wget', 'unzip', 'java-1.8.0-openjdk', 'nfs-utils.x86_64'] do
+for package in ['python-setuptools', 'unzip', 'java-1.8.0-openjdk', 'nfs-utils.x86_64'] do
   yum_package "#{package}" do
     package_name "#{package}"
     action :install
   end
 end
 
-for dir_path in ['/opt/aws/bin', '/var/lib/jenkins'] do
+for dir_path in ['/opt/aws/bin'] do
   directory "#{dir_path}" do
     owner 'root'
     group 'root'
@@ -27,6 +27,10 @@ for dir_path in ['/opt/aws/bin', '/var/lib/jenkins'] do
     action :create
   end
 end
+
+directory '/var/lib/jenkins' do
+  action :create
+done
 
 bash 'bootstrap_pip_awscli' do
   code <<-EOH
