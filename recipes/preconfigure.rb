@@ -19,7 +19,7 @@ for package in ['python-setuptools', 'wget', 'unzip', 'java-1.8.0-openjdk', 'nfs
   end
 end
 
-for dir_path in ['/tmp/aws/bin'] do
+for dir_path in ['/opt/aws/bin', '/var/lib/jenkins'] do
   directory "#{dir_path}" do
     owner 'root'
     group 'root'

@@ -20,6 +20,10 @@ user 'jenkins' do
   shell '/bin/bash'
 end
 
+group 'jenkins' do
+  action :create
+end
+
 for package in ['jenkins', 'mariadb'] do
   yum_package "#{package}" do
     package_name "#{package}"
@@ -27,16 +31,16 @@ for package in ['jenkins', 'mariadb'] do
   end
 end
 
-for dir in ['/var/lib/jenkins/.aws', '/var/lib/jenkins/users', '/var/lib/jenkins/users/admin', '/var/lib/jenkins/.ssh']
+execute 'perm_update' do
+  command 'chown jenkins:jenkins /var/lib/jenkins'
+  action :create
+done
+
+for dir in ['/var/lib/jenkins/.aws', '/var/lib/jenkins/users/admin', '/var/lib/jenkins/.ssh']
   directory "#{dir}" do
     action :create
+    recursive true
   end
-end
-
-git '/tmp/jenkins-script' do
-  repository "https://github.com/dasbiswajit/jenkins-script.git"
-  reference "master"
-  action :checkout
 end
 
 bash 'jenkins_plugin' do
