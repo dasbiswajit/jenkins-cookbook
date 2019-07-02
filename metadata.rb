@@ -1,6 +1,6 @@
 name 'test-Cookbook'
-maintainer 'Biswajit Das'
-maintainer_email 'biswajitbangalore@gmail.com'
+maintainer 'Avinash Gupta'
+maintainer_email 'avinit92@gmail.com'
 license 'All rights reserved'
 description 'This cookbook is a chef compliant cookbook'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
