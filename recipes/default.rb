@@ -1,4 +1,4 @@
-# Cookbook: test-cookbook
+# Cookbook: test-cookbook.
 # Recipe: default
 user_name = "admin"
 # Get the current version from metadata
